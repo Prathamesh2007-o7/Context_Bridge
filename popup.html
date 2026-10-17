@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ContextBridge</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <div class="brand-mark" aria-hidden="true">CB</div>
+      <div class="brand-copy">
+        <h1>ContextBridge</h1>
+        <p>Your work, wherever AI takes you.</p>
+      </div>
+      <span class="local-pill"><span class="status-dot"></span> LOCAL AI</span>
+    </header>
+
+    <section class="hero">
+      <div class="eyebrow">CONVERSATION HANDOFF</div>
+      <h2>Don't start<br>from scratch.</h2>
+      <p>Turn the chat you're working on into a portable project handoff with Gemma 3.</p>
+      <div class="hero-decoration" aria-hidden="true"><span></span><span></span><span></span></div>
+    </section>
+
+    <section class="section-block">
+      <div class="section-heading">
+        <div class="step-number">01</div>
+        <div><h3>Capture your chat</h3><p>Open a conversation in the active tab first.</p></div>
+      </div>
+      <button id="captureButton" class="button button-primary"><span class="button-icon">↳</span> Capture conversation</button>
+      <div id="captureMeta" class="capture-meta hidden"></div>
+      <div id="captureStatus" class="status-line" role="status">Ready when you are.</div>
+      <details class="details-panel" id="transcriptDetails">
+        <summary>Review / edit extracted text <span class="summary-chevron">⌄</span></summary>
+        <p class="helper-text">Review what will be sent to your local model. Remove sensitive details before generating.</p>
+        <textarea id="transcriptInput" class="text-area transcript-area" placeholder="Captured conversation text will appear here…" spellcheck="false"></textarea>
+      </details>
+    </section>
+
+    <section class="section-block output-section">
+      <div class="section-heading">
+        <div class="step-number">02</div>
+        <div><h3>Create the handoff</h3><p>Preserve state, decisions, blockers and next steps.</p></div>
+      </div>
+      <div class="model-row">
+        <label for="modelInput">Local model</label>
+        <input id="modelInput" type="text" value="gemma3:4b" spellcheck="false" autocomplete="off">
+      </div>
+      <div class="button-row">
+        <button id="checkButton" class="button button-secondary">Check Ollama</button>
+        <button id="generateButton" class="button button-accent" disabled>Generate handoff <span aria-hidden="true">↗</span></button>
+      </div>
+      <div id="aiStatus" class="status-line" role="status">Gemma 3 has not been checked yet.</div>
+      <label class="field-label" for="outputInput">YOUR HANDOFF <span id="outputCount">Editable</span></label>
+      <textarea id="outputInput" class="text-area output-area" placeholder="Your structured handoff will appear here. You can edit it before copying…" spellcheck="false"></textarea>
+      <div class="button-row output-actions">
+        <button id="copyButton" class="button button-primary" disabled>Copy handoff</button>
+        <button id="downloadButton" class="button button-secondary" disabled>Export .md</button>
+      </div>
+    </section>
+
+    <details class="settings-panel">
+      <summary>Settings & privacy <span class="summary-chevron">⌄</span></summary>
+      <div class="settings-copy">
+        <p><strong>Local processing:</strong> conversation text is sent to the Ollama service running on this computer, not to a ContextBridge cloud server.</p>
+        <p>Only capture pages you choose. Review the extracted text before generating, especially if it contains passwords, personal information, API keys, or confidential work.</p>
+        <p>If Ollama is unavailable, start it and confirm that the selected model is installed.</p>
+      </div>
+    </details>
+
+    <footer class="footer"><span>Built for work that moves between models.</span><button id="clearButton" class="text-button">Clear session</button></footer>
+  </main>
+  <script src="popup.js"></script>
+</body>
+</html>
